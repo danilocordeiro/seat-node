@@ -1,24 +1,22 @@
 const mongoose = require('../../database');
 
-const TaskSchema = new mongoose.Schema({
+const ProjectSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-  project: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project',
-    require: true,
+  description: {
+    type: String,
+    unique: true,
   },
-  assignedTo: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     require: true,
   },
-  completed: [{
-    type: Boolean,
-    require: true,
-    default: false
+  tasks: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Task',
   }],
   createdAt: {
     type: Date,
@@ -26,6 +24,6 @@ const TaskSchema = new mongoose.Schema({
   },
 });
 
-const Task = mongoose.model('Task', TaskSchema);
+const Project = mongoose.model('Project', ProjectSchema);
 
-module.exports = Task;
+module.exports = Project;
